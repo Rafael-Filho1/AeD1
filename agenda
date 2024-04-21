@@ -1,0 +1,72 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define MAX 100
+
+typedef struct {
+    char nome[50];
+} Pessoa;
+
+Pessoa agenda[MAX];
+int total = 0;
+
+void AdicionarNome(Pessoa p) {
+    agenda[total] = p;
+    total++;
+}
+
+void RemoverNome(char nome[]) {
+    for(int i = 0; i < total; i++) {
+        if(strcmp(agenda[i].nome, nome) == 0) {
+            for(int j = i; j < total - 1; j++) {
+                agenda[j] = agenda[j + 1];
+            }
+            total--;
+            return;
+        }
+    }
+    printf("Nome nao encontrado! \n");
+}
+
+void ListarAgenda() {
+    for(int i = 0; i < total; i++) {
+        printf("%s", agenda[i].nome);
+    }
+}
+
+int main () {
+
+    int escolha;
+    Pessoa p;
+
+    do {
+        printf("\n1) Adicionar Nome? \n");
+        printf("2) Remover Nome? \n");
+        printf("3) Listar todos os nomes? \n");
+        printf("4) Sair.\n");
+        printf("Escolha a sua opcao! (Pressionando o numero indicado):");
+        scanf("%d", &escolha);
+        if((escolha < 1 || escolha > 4) && (escolha != 1 && escolha != 2 && escolha != 3 && escolha != 4)) {
+            printf("Agenda fechada. \n");
+            exit(1);
+        }
+        switch(escolha) {
+            case 1: printf("Digite o nome que voce queira adicionar: ");
+                    scanf("%s", p.nome);
+                    AdicionarNome(p);
+                    printf("\n");
+                    break;
+            case 2: printf("Digite o nome que voce queira remover: ");
+                    scanf("%s", p.nome);
+                    RemoverNome(p.nome);
+                    break;
+            case 3: ListarAgenda();
+                    break;
+            case 4: printf("Saindo da Agenda! \n");
+                    break;
+            default: printf("Opcao Invalida! \n");
+        }
+    } while(escolha != 4);
+
+    return 0;
+}
