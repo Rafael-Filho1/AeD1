@@ -31,6 +31,7 @@ void RemoverNome(char nome[]) {
 void ListarAgenda() {
     for(int i = 0; i < total; i++) {
         printf("%s", agenda[i].nome);
+        return;
     }
 }
 
@@ -46,7 +47,8 @@ int main () {
         printf("4) Sair.\n");
         printf("Escolha a sua opcao! (Pressionando o numero indicado):");
         scanf("%d", &escolha);
-        if((escolha < 1 || escolha > 4) && (escolha != 1 && escolha != 2 && escolha != 3 && escolha != 4)) {
+        fflush(stdin);
+        if(escolha < 1 || escolha > 4) {
             printf("Agenda fechada. \n");
             exit(1);
         }
@@ -60,7 +62,8 @@ int main () {
                     scanf("%s", p.nome);
                     RemoverNome(p.nome);
                     break;
-            case 3: ListarAgenda();
+            case 3: printf("Aqui esta a sua agenda! \n");
+                    ListarAgenda();
                     break;
             case 4: printf("Saindo da Agenda! \n");
                     break;
